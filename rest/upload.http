@@ -1,0 +1,18 @@
+POST http://localhost:8080/public/upload
+Content-Type: multipart/form-data; boundary=boundary
+
+
+--boundary
+Content-Disposition: form-data; name="requestDto"
+Content-Type: application/json
+
+{
+  "title": "test"
+}
+
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="test.hwp"
+Content-Type: application/octet-stream
+
+< ./test.hwp

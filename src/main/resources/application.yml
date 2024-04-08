@@ -1,0 +1,52 @@
+# ====================== Profile 선택 =============================
+spring:
+  profiles:
+    active: # ================================================= 프로파일 [prod, dev, test, local] ======= [배포 시 확인]
+    include:
+      - common
+
+
+
+--- # ====================== 공통 ===========================
+spring:
+  config:
+    activate:
+      on-profile: common
+  datasource:
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    open-in-view: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        format_sql: true
+        #        show_sql: true
+        default_batch_fetch_size: 500
+        jdbc.lob.non_contextual_creation: true
+        jdbc:
+          batch_size: 500
+    hibernate:
+      ############################################################################
+      ddl-auto: update # 테스트용 설정 => create, update, none
+      ############################################################################
+  data:
+    rest:
+      default-page-size: 10
+  servlet: ## 파일 업로드
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+      enabled: true # 업로드 기능 여부
+      ########################### UPLOAD PATH ###################################
+      #      location: 각
+      ############################################################################
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8 #한글처리
+      force: true    #한글처리
+decorator: # 로그 활성여부
+  datasource:
+    p6spy:
+      enable-logging: true
